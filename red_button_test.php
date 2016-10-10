@@ -12,7 +12,11 @@ Version: 0.1
 Author URI: http://vldmr.xyz
 */
 
- 
+//add JS
+ wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
+ wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+
+//add button
  function add_red_buton( ) {
     global $post;
 	global $hook_flag2;
