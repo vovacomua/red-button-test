@@ -22,11 +22,13 @@ Author URI: http://vldmr.xyz
  
  // THE FUNCTION
  function the_action_function(){
- /* this area is very simple but being serverside it affords the possibility of retreiving data from the server
- and passing it back to the javascript function */
  $name = $_POST['name'];
- echo"Hello World, " . $name;// this is passed back to the javascript function
- die();// wordpress may print out a spurious zero without this - can be particularly bad if using json
+ 
+ $serverTime = date('H:i:s');
+ $serverIP = $_SERVER['SERVER_ADDR'];
+ 
+ echo $serverTime." ".$serverIP;
+ die();
  }
 
 //add button
