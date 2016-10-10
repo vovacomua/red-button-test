@@ -15,6 +15,19 @@ Author URI: http://vldmr.xyz
 //add JS
  wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
  wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+ 
+ // add response 
+ add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
+ add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need this to serve non logged in users
+ 
+ // THE FUNCTION
+ function the_action_function(){
+ /* this area is very simple but being serverside it affords the possibility of retreiving data from the server
+ and passing it back to the javascript function */
+ $name = $_POST['name'];
+ echo"Hello World, " . $name;// this is passed back to the javascript function
+ die();// wordpress may print out a spurious zero without this - can be particularly bad if using json
+ }
 
 //add button
  function add_red_buton( ) {
