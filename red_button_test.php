@@ -26,17 +26,17 @@ Author URI: http://vldmr.xyz
  
  // THE FUNCTION
  function the_action_function(){
-
  $clientPostID = $_POST['name'];
+ $time = $_POST['time'];
  $clientIP = $_SERVER['REMOTE_ADDR'];
- $clientRecord = $clientPostID."::".$clientIP;
+ $clientRecord = $time."::".$clientIP;
  
  $serverTime = date('H:i:s');
  $serverIP = $_SERVER['SERVER_ADDR'];
  
  $result = add_post_meta( $clientPostID, 'red_button', $clientRecord );
  
- echo $serverTime." ".$serverIP." ".$result;
+ echo $serverTime." ".$serverIP;
  die();
  }
 
