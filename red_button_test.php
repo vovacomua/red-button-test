@@ -12,6 +12,9 @@ Version: 0.1
 Author URI: http://vldmr.xyz
 */
 
+//add CSS
+wp_enqueue_style( 'red_button_test', plugin_dir_url( __FILE__ ) . 'red_button_test.css',false,'1.1','all');
+
 //add JS
  wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
  wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
@@ -71,7 +74,7 @@ add_action("add_meta_boxes", "add_custom_meta_box2");
 		 <form id="theForm">
 		 <input id="name" name="name" value = "'.$post->ID.'" type="hidden" />
 		 <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
-		 <input id="submit_button" value = "Click This" type="button" onClick="submit_me();" />
+		 <input id="submit_button" class="redButtonSize redButtonEnabled" value = "Click This" type="button" onClick="submit_me();" />
 		 </form>
 		 <div id="response_area">
 		 This is where we\'ll get the response

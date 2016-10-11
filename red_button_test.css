@@ -1,0 +1,15 @@
+.redButtonSize
+{
+    width:300px;
+	height:100px;
+}
+
+.redButtonEnabled
+{
+	background-color:#710606 !important;
+}
+
+.redButtonDisabled
+{
+	background-color:#00ff00 !important;
+}
