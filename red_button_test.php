@@ -48,18 +48,18 @@ add_action( "add_meta_boxes", "add_custom_meta_box2" );
  
  // THE FUNCTION
 function the_action_function(){
-	$clientPostID = $_POST['name'];
+	$client_post_ID = $_POST['name'];
 	$time = $_POST['time'];
-	$clientIP = $_SERVER['REMOTE_ADDR'];
-	$clientRecord = $time."::".$clientIP;
+	$client_IP = $_SERVER['REMOTE_ADDR'];
+	$client_record = $time."::".$client_IP;
 
-	$serverTime = date( 'H:i:s' );
-	$serverIP = $_SERVER['SERVER_ADDR'];
+	$server_time = date( 'H:i:s' );
+	$server_IP = $_SERVER['SERVER_ADDR'];
 
-	$result = add_post_meta( $clientPostID, 'red_button2', $clientRecord );
+	$result = add_post_meta( $client_post_ID, 'red_button2', $client_record );
 
-	echo $serverTime." ".$serverIP;
-die();
+	echo $server_time." ".$server_IP;
+	die();
 }
 
 //add button
