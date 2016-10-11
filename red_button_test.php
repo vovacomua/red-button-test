@@ -71,14 +71,14 @@ add_action("add_meta_boxes", "add_custom_meta_box2");
 	if ($hook_flag2 == 2 && $post->ID){
 		 $the_form = '
 		 <div class="comments-area">
-		 <form id="theForm">
-		 <input id="name" name="name" value = "'.$post->ID.'" type="hidden" />
-		 <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
-		 <input id="submit_button" class="redButtonSize redButtonEnabled" value = "Нажать!" type="button" onClick="submit_me();" />
-		 </form>
-		 <div id="response_area">
-		 This is where we\'ll get the response
-		 </div> </div>';
+			 <form id="theForm">
+				 <input id="name" name="name" value = "'.$post->ID.'" type="hidden" />
+				 <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
+				 <input id="submit_button" class="redButtonSize redButtonEnabled" value = "Нажать!" type="button" onClick="submit_me();" />
+			 </form>
+			 <div id="response_area">
+			 </div> 
+		 </div>';
 	echo $the_form;
 	}
 }
