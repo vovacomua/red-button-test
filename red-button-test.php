@@ -1,6 +1,6 @@
 <?php
 /**
- * @package red_button_test
+ * @package red-button-test
  * @version 0.1
  */
 /*
