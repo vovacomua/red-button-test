@@ -13,15 +13,15 @@ Author URI: http://vldmr.xyz
 */
 
 //add CSS
-wp_enqueue_style( 'red_button_test', plugin_dir_url( __FILE__ ) . 'red_button_test.css',false,'1.1','all');
+wp_enqueue_style( 'red_button_test', plugin_dir_url( __FILE__ ) . 'red_button_test.css',false,'1.1','all' );
 
 //add JS
- wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
- wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
+wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
  
- // add response 
- add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
- add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need this to serve non logged in users
+// add response 
+add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
+add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need this to serve non logged in users
  
 function custom_meta_box_markup2()
 {
@@ -41,26 +41,26 @@ function custom_meta_box_markup2()
 
 function add_custom_meta_box2()
 {
-    add_meta_box("demo-meta-box2", "Red Button Clicks 2", "custom_meta_box_markup2", "post", "side", "high", null);
+    add_meta_box( "demo-meta-box2", "Red Button Clicks 2", "custom_meta_box_markup2", "post", "side", "high", null );
 }
 
-add_action("add_meta_boxes", "add_custom_meta_box2");
+add_action( "add_meta_boxes", "add_custom_meta_box2" );
  
  // THE FUNCTION
- function the_action_function(){
- $clientPostID = $_POST['name'];
- $time = $_POST['time'];
- $clientIP = $_SERVER['REMOTE_ADDR'];
- $clientRecord = $time."::".$clientIP;
- 
- $serverTime = date('H:i:s');
- $serverIP = $_SERVER['SERVER_ADDR'];
- 
- $result = add_post_meta( $clientPostID, 'red_button2', $clientRecord );
- 
- echo $serverTime." ".$serverIP;
- die();
- }
+function the_action_function(){
+	$clientPostID = $_POST['name'];
+	$time = $_POST['time'];
+	$clientIP = $_SERVER['REMOTE_ADDR'];
+	$clientRecord = $time."::".$clientIP;
+
+	$serverTime = date( 'H:i:s' );
+	$serverIP = $_SERVER['SERVER_ADDR'];
+
+	$result = add_post_meta( $clientPostID, 'red_button2', $clientRecord );
+
+	echo $serverTime." ".$serverIP;
+die();
+}
 
 //add button
  function add_red_buton( ) {
@@ -68,7 +68,7 @@ add_action("add_meta_boxes", "add_custom_meta_box2");
 	global $hook_flag2;
 	$hook_flag2 += 1;
 	
-	if ($hook_flag2 == 2 && $post->ID){
+	if ( $hook_flag2 == 2 && $post->ID ){
 		 $the_form = '
 		 <div class="comments-area">
 			 <form id="theForm">
@@ -79,7 +79,7 @@ add_action("add_meta_boxes", "add_custom_meta_box2");
 			 <div id="response_area">
 			 </div> 
 		 </div>';
-	echo $the_form;
+		echo $the_form;
 	}
 }
 add_action( "pre_get_comments", "add_red_buton" );
