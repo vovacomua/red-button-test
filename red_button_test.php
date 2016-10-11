@@ -20,14 +20,23 @@ Author URI: http://vldmr.xyz
  add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
  add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need this to serve non logged in users
  
+
+
+
+ 
  // THE FUNCTION
  function the_action_function(){
- $name = $_POST['name'];
+
+ $clientPostID = $_POST['name'];
+ $clientIP = $_SERVER['REMOTE_ADDR'];
+ $clientRecord = $clientPostID."::".$clientIP;
  
  $serverTime = date('H:i:s');
  $serverIP = $_SERVER['SERVER_ADDR'];
  
- echo $serverTime." ".$serverIP;
+ $result = add_post_meta( $clientPostID, 'red_button', $clientRecord );
+ 
+ echo $serverTime." ".$serverIP." ".$result;
  die();
  }
 
