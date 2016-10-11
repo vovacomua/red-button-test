@@ -74,7 +74,7 @@ add_action("add_meta_boxes", "add_custom_meta_box2");
 			 <form id="theForm">
 				 <input id="name" name="name" value = "'.$post->ID.'" type="hidden" />
 				 <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
-				 <input id="submit_button" class="redButtonSize redButtonEnabled" value = "Нажать!" type="button" onClick="submit_me();" />
+				 <input id="submit_button" class="red-button-size red-button-enabled" value = "Нажать!" type="button" onClick="submit_me();" />
 			 </form>
 			 <div id="response_area">
 			 </div> 
