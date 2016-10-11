@@ -13,7 +13,7 @@ Author URI: http://vldmr.xyz
 */
 
 //add CSS
-wp_enqueue_style( 'red_button_test', plugin_dir_url( __FILE__ ) . 'red_button_test.css',false,'1.1','all' );
+wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css',false,'1.1','all' );
 
 //add JS
 wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
