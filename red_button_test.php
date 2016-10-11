@@ -32,9 +32,9 @@ function custom_meta_box_markup2()
 	$stored_clicks = get_post_meta( $post_id, 'red_button2' );
 	
 	if ($stored_clicks){
-		foreach( $stored_clicks as $click )
+		foreach( $stored_clicks as $click ){
 			$s[] = $click;
-		
+		}
 		echo implode(', ', $s);	
 	}
 }
@@ -83,5 +83,3 @@ die();
 	}
 }
 add_action( "pre_get_comments", "add_red_buton" );
-
-?>
