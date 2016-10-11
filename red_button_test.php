@@ -20,9 +20,28 @@ Author URI: http://vldmr.xyz
  add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
  add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need this to serve non logged in users
  
+function custom_meta_box_markup2()
+{
+	global $post;
+ 
+	$post_id = $post->ID;
+	
+	$stored_clicks = get_post_meta( $post_id, 'red_button2' );
+	
+	if ($stored_clicks){
+		foreach( $stored_clicks as $click )
+			$s[] = $click;
+		
+		echo implode(', ', $s);	
+	}
+}
 
+function add_custom_meta_box2()
+{
+    add_meta_box("demo-meta-box2", "Red Button Clicks 2", "custom_meta_box_markup2", "post", "side", "high", null);
+}
 
-
+add_action("add_meta_boxes", "add_custom_meta_box2");
  
  // THE FUNCTION
  function the_action_function(){
@@ -34,7 +53,7 @@ Author URI: http://vldmr.xyz
  $serverTime = date('H:i:s');
  $serverIP = $_SERVER['SERVER_ADDR'];
  
- $result = add_post_meta( $clientPostID, 'red_button', $clientRecord );
+ $result = add_post_meta( $clientPostID, 'red_button2', $clientRecord );
  
  echo $serverTime." ".$serverIP;
  die();
