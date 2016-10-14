@@ -48,7 +48,7 @@ add_action( "add_meta_boxes", "add_custom_meta_box2" );
  
  // THE FUNCTION
 function the_action_function(){
-	$client_post_ID = $_POST['name'];
+	$client_post_ID = $_POST['post-id'];
 	$time = $_POST['time'];
 	$client_IP = $_SERVER['REMOTE_ADDR'];
 	$client_record = $time."::".$client_IP;
@@ -72,7 +72,7 @@ function the_action_function(){
 		 $the_form = '
 		 <div class="comments-area">
 			 <form id="theForm">
-				 <input id="name" name="name" value = "'.$post->ID.'" type="hidden" />
+				 <input id="post-id" name="post-id" value = "'.$post->ID.'" type="hidden" />
 				 <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
 				 <input id="submit_button" class="red-button-size red-button-enabled" value = "Нажать!" type="button" onClick="submit_me();" />
 			 </form>
