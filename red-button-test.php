@@ -62,14 +62,12 @@ function the_action_function(){
 	die();
 }
 
-//add button
- function add_red_buton( ) {
-    global $post;
-	global $hook_flag2;
-	$hook_flag2 += 1;
-	
-	if ( $hook_flag2 == 2 && $post->ID ){
-		 $the_form = '
+function add_red_button( $content ) {
+	global $post;
+
+	if( is_single() && ! empty( $GLOBALS['post'] ) ) {
+		if ( $GLOBALS['post']->ID == get_the_ID() ) {
+			$the_form = '
 		 <div class="comments-area">
 			 <form id="theForm" autocomplete="off">
 				 <input id="post-id" name="post-id" value = "'.$post->ID.'" type="hidden" />
@@ -79,7 +77,10 @@ function the_action_function(){
 			 <div id="response_area">
 			 </div> 
 		 </div>';
-		echo $the_form;
+
+			$content .= $the_form;
+		}
 	}
+	return $content;
 }
-add_action( "pre_get_comments", "add_red_buton" );
+add_filter('the_content', 'add_red_button');
