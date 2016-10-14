@@ -29,13 +29,17 @@ function custom_meta_box_markup2()
  
 	$post_id = $post->ID;
 	
-	$stored_clicks = get_post_meta( $post_id, 'red_button2' );
+	$stored_clicks = get_post_meta( $post_id, 'red_button3' , false);
 	
-	if ($stored_clicks){
-		foreach( $stored_clicks as $click ){
-			$s[] = $click;
-		}
-		echo implode(', ', $s);	
+	//if ($stored_clicks){
+	//	foreach( $stored_clicks as $click ){
+	//		$s[] = $click;
+	//	}
+	//	echo implode(', ', $s);
+	//}
+
+	foreach ($stored_clicks as $stored_click) {
+		echo '<p>'. $stored_click["time"] .' :: '.$stored_click["client_IP"] . '</p>';
 	}
 }
 
@@ -51,12 +55,17 @@ function the_action_function(){
 	$client_post_ID = $_POST['post-id'];
 	$time = $_POST['time'];
 	$client_IP = $_SERVER['REMOTE_ADDR'];
-	$client_record = $time."::".$client_IP;
+	//$client_record = $time."::".$client_IP;
+
+	$client_info = array(
+		'time' => $time,
+		'client_IP' => $client_IP
+	);
+
+	$result = add_post_meta( $client_post_ID, 'red_button3', $client_info );
 
 	$server_time = date( 'H:i:s' );
 	$server_IP = $_SERVER['SERVER_ADDR'];
-
-	$result = add_post_meta( $client_post_ID, 'red_button2', $client_record );
 
 	echo $server_time." ".$server_IP;
 	die();
@@ -84,3 +93,5 @@ function add_red_button( $content ) {
 	return $content;
 }
 add_filter('the_content', 'add_red_button');
+
+
