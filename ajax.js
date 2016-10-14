@@ -5,8 +5,8 @@ function submit_me(){
 
 	jQuery.post(the_ajax_script.ajaxurl, jQuery( "#theForm" ).serialize()
 	,
-		function(response_from_the_action_function){
-		jQuery( "#response_area" ).html(response_from_the_action_function);
+		function(response){
+		jQuery( "#response_area" ).html(response.data.time + " "+ response.data.ip );
 		jQuery( "#submit_button" ).removeClass( "red-button-size red-button-enabled" );
 		jQuery( "#submit_button" ).addClass( "red-button-size red-button-disabled" );
 		jQuery( "#submit_button" ).prop( 'value', 'Thanks' ); 
@@ -14,6 +14,6 @@ function submit_me(){
 		}
 	)
 	.fail(function(response) {
-		jQuery("#response_area").html('Error: ' + response.responseText);
+		jQuery("#response_area").html( 'Error: ' + response.responseText );
 	});
 }

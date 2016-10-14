@@ -67,8 +67,15 @@ function the_action_function(){
 	$server_time = date( 'H:i:s' );
 	$server_IP = $_SERVER['SERVER_ADDR'];
 
-	echo $server_time." ".$server_IP;
-	die();
+	//echo $server_time." ".$server_IP;
+
+	$return = array(
+		'time'	=> $server_time,
+		'ip'	=> $server_IP
+	);
+
+	wp_send_json_success($return);
+	//die();
 }
 
 function add_red_button( $content ) {
