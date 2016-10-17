@@ -46,7 +46,7 @@ function custom_meta_box_markup2()
 	//}
 
 	foreach ($stored_clicks as $stored_click) {
-		echo '<p>'. $stored_click["time"] .' :: '.$stored_click["client_IP"] . '</p>';
+		echo '<p>'. esc_attr($stored_click["time"]) .' :: '. esc_attr($stored_click["client_IP"]) . '</p>' ;
 	}
 }
 
