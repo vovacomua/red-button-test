@@ -28,7 +28,7 @@ add_action( 'wp_enqueue_scripts', 'myajax_data', 99 );
 function myajax_data() {
 	wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css',false,'1.1','all' );
 	wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
-	wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) , 'nonce' => wp_create_nonce('myajax-nonce') ) );
+	wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
  
 function custom_meta_box_markup2() {
@@ -101,7 +101,7 @@ function add_red_button( $content ) {
 		if ( $GLOBALS['post']->ID == get_the_ID() ) {
 			$the_form = '
 		 <div class="comments-area">
-			 <form id="theForm" autocomplete="off">
+			 <form id="theForm" autocomplete="off">' . wp_nonce_field( 'myajax-nonce', 'nonce' ) . '
 				 <input id="post-id" name="post-id" value = "'.$post->ID.'" type="hidden" />
 				 <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
 				 <input id="submit_button" class="red-button-size red-button-enabled" value = "Нажать!" type="button" onClick="submit_me();" />
