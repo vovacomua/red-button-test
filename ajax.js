@@ -12,7 +12,6 @@ function submit_me(){
 	var data = {
 		'action' : action,
 		'nonce'  : nonce,
-		'post-id': postid,
 		'time'   : time
 	};
 
