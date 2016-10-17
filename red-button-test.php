@@ -13,10 +13,10 @@ Author URI: http://vldmr.xyz
 */
 
 //add CSS
-wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css',false,'1.1','all' );
+//wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css',false,'1.1','all' );
 
 //add JS
-wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
+//wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
 //wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
  
 // add response 
@@ -25,6 +25,8 @@ add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need thi
 
 add_action( 'wp_enqueue_scripts', 'myajax_data', 99 );
 function myajax_data(){
+	wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css',false,'1.1','all' );
+	wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
 	wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) , 'nonce' => wp_create_nonce('myajax-nonce') ) );
 }
  
