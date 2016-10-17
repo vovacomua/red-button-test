@@ -58,6 +58,7 @@ add_action( "add_meta_boxes", "add_custom_meta_box2" );
  
  // THE FUNCTION
 function the_action_function() {
+
 	if ( empty( $_POST['nonce'] ) || empty( $_POST['post-id'] ) || empty( $_POST['time'] ) ) {
 		die ( 'Error!');
 	}
@@ -68,7 +69,11 @@ function the_action_function() {
 		die ( 'Error!');
 	}
 
-	$client_post_ID = sanitize_text_field( $_POST['post-id'] );
+
+	$referer = wp_get_referer();
+	$client_post_ID = url_to_postid( $referer );
+
+	//$client_post_ID = sanitize_text_field( $_POST['post-id'] );
 	$time = sanitize_text_field( $_POST['time'] );
 	$client_IP = $_SERVER['REMOTE_ADDR'];
 	//$client_record = $time."::".$client_IP;
