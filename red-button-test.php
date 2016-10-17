@@ -69,8 +69,8 @@ function the_action_function(){
 		die ( 'Error!');
 	}
 
-	$client_post_ID = $_POST['post-id'];
-	$time = $_POST['time'];
+	$client_post_ID = sanitize_text_field( $_POST['post-id'] );
+	$time = sanitize_text_field( $_POST['time']);
 	$client_IP = $_SERVER['REMOTE_ADDR'];
 	//$client_record = $time."::".$client_IP;
 
