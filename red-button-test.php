@@ -36,7 +36,7 @@ function custom_meta_box_markup2() {
  
 	$post_id = $post->ID;
 	
-	$stored_clicks = get_post_meta( $post_id, 'red_button3' , false);
+	$stored_clicks = get_post_meta( $post_id, 'red_button5' , false);
 	
 	//if ($stored_clicks){
 	//	foreach( $stored_clicks as $click ){
@@ -46,7 +46,9 @@ function custom_meta_box_markup2() {
 	//}
 
 	foreach ($stored_clicks as $stored_click) {
-		echo '<span> <b>'. esc_attr($stored_click["time"]) .'</b> :: '. esc_attr($stored_click["client_IP"]) . ' </span>' ;
+		$client_time = gmdate( 'H:i:s' , $stored_click["time"] );
+
+		echo '<span> <b>'. esc_attr($client_time) .'</b> :: '. esc_attr($stored_click["client_IP"]) . ' </span>' ;
 	}
 }
 
@@ -69,12 +71,16 @@ function the_action_function() {
 		die ( 'Error!');
 	}
 
+	$time = sanitize_text_field( $_POST['time'] );
+
+	if (! is_timestamp($time)) {
+		die ( 'Error!');
+	}
 
 	$referer = wp_get_referer();
 	$client_post_ID = url_to_postid( $referer );
 
-	//$client_post_ID = sanitize_text_field( $_POST['post-id'] );
-	$time = sanitize_text_field( $_POST['time'] );
+
 	$client_IP = $_SERVER['REMOTE_ADDR'];
 	//$client_record = $time."::".$client_IP;
 
@@ -83,7 +89,7 @@ function the_action_function() {
 		'client_IP' => $client_IP,
 	);
 
-	$result = add_post_meta( $client_post_ID, 'red_button3', $client_info );
+	$result = add_post_meta( $client_post_ID, 'red_button5', $client_info );
 
 	$server_time = date( 'H:i:s' );
 	$server_IP = $_SERVER['SERVER_ADDR'];
@@ -121,3 +127,11 @@ function add_red_button( $content ) {
 }
 
 add_filter('the_content', 'add_red_button');
+
+function is_timestamp($timestamp)
+{
+	return ((string) (int) $timestamp === $timestamp)
+	       && ($timestamp <= PHP_INT_MAX)
+	       && ($timestamp >= ~PHP_INT_MAX)
+	       && (!strtotime($timestamp));
+}

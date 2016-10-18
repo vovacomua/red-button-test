@@ -19,10 +19,10 @@ function submit_me(){
 		data = {
 			'action' : 'the_ajax_hook',
 			'nonce'  : $form.find('input[name="nonce"]').val(),
-			'time'   : dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds()
+			'time'   : Math.floor(dt.getTime() / 1000)
 		};
 
-	//alert( action );
+	//alert(  Math.floor(dt.getTime() / 1000) );
 
 	jQuery.post(the_ajax_script.ajaxurl, data, function(response){
 		console.log(response);
