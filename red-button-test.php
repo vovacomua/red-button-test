@@ -11,13 +11,6 @@ Author: Vladimir Revenko
 Version: 0.1
 Author URI: http://vldmr.xyz
 */
-
-//add CSS
-//wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css',false,'1.1','all' );
-
-//add JS
-//wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
-//wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
  
 // add response 
 add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
@@ -37,13 +30,6 @@ function custom_meta_box_markup2() {
 	$post_id = $post->ID;
 	
 	$stored_clicks = get_post_meta( $post_id, 'red_button5' , false);
-	
-	//if ($stored_clicks){
-	//	foreach( $stored_clicks as $click ){
-	//		$s[] = $click;
-	//	}
-	//	echo implode(', ', $s);
-	//}
 
 	foreach ($stored_clicks as $stored_click) {
 		$client_time = gmdate( 'H:i:s' , $stored_click["time"] );
@@ -80,9 +66,7 @@ function the_action_function() {
 	$referer = wp_get_referer();
 	$client_post_ID = url_to_postid( $referer );
 
-
 	$client_IP = $_SERVER['REMOTE_ADDR'];
-	//$client_record = $time."::".$client_IP;
 
 	$client_info = array(
 		'time' => $time,
@@ -93,8 +77,6 @@ function the_action_function() {
 
 	$server_time = date( 'H:i:s' );
 	$server_IP = $_SERVER['SERVER_ADDR'];
-
-	//echo $server_time." ".$server_IP;
 
 	$return = array(
 		'time'	=> $server_time,
