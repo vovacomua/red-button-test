@@ -108,7 +108,6 @@ function add_red_button( $content ) {
 		 <div class="comments-area">
 			 <form id="theForm" autocomplete="off">' . wp_nonce_field( 'myajax-nonce', 'nonce' ) . '
 				 <input id="post-id" name="post-id" value = "'.$post->ID.'" type="hidden" />
-				 <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
 				 <input id="submit_button" class="red-button-size red-button-enabled" value = "Нажать!" type="button" onClick="submit_me();" />
 			 </form>
 			 <div id="response_area">
