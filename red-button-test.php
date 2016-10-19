@@ -93,12 +93,13 @@ function add_red_button( $content ) {
 	if( is_single() && ! empty( $GLOBALS['post'] ) ) {
 		if ( $GLOBALS['post']->ID == get_the_ID() ) {
 			$the_form = '
-				 <div class="comments-area">
-					 <form id="theForm" autocomplete="off">' . wp_nonce_field( 'myajax-nonce', 'nonce' ) . '
-						 <input id="post-id" name="post-id" value = "'.$post->ID.'" type="hidden" />
-						 <input id="submit_button" class="red-button-size red-button-enabled" value = "Нажать!" type="button" onClick="submit_me();" />
+				 <div class="wrap">
+					 <form id="the-form" autocomplete="off">' .
+			             wp_nonce_field( 'myajax-nonce', 'nonce' ) . '
+						 <input id="post-id" name="post-id" value = "' . $post->ID . '" type="hidden" />
+						 <input id="submit-button" class="red-button-size red-button-enabled" value = "Нажать!" type="button" onClick="submit_me();" />
 					 </form>
-					 <div id="response_area">
+					 <div id="response-area">
 					 </div> 
 				 </div>';
 

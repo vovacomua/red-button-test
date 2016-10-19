@@ -1,6 +1,6 @@
 function submit_me(){
 
-	var $form = jQuery('#theForm'),
+	var $form = jQuery('#the-form'),
 		dt = new Date(),
 		data = {
 			'action' : 'the_ajax_hook',
@@ -12,14 +12,14 @@ function submit_me(){
 
 	jQuery.post(the_ajax_script.ajaxurl, data, function(response){
 		console.log(response);
-		jQuery( "#response_area" ).html(response.data.time + " "+ response.data.ip );
-		jQuery( "#submit_button" ).removeClass( "red-button-size red-button-enabled" );
-		jQuery( "#submit_button" ).addClass( "red-button-size red-button-disabled" );
-		jQuery( "#submit_button" ).prop( 'value', 'Thanks' ); 
-		jQuery( "#submit_button" ).prop( 'disabled', true );
+		jQuery( "#response-area" ).html(response.data.time + " "+ response.data.ip );
+		jQuery( "#submit-button" ).removeClass( "red-button-size red-button-enabled" );
+		jQuery( "#submit-button" ).addClass( "red-button-size red-button-disabled" );
+		jQuery( "#submit-button" ).prop( 'value', 'Thanks' );
+		jQuery( "#submit-button" ).prop( 'disabled', true );
 		}
 	)
 	.fail(function(response) {
-		jQuery("#response_area").html( 'Error: ' + response.responseText );
+		jQuery("#response-area").html( 'Error: ' + response.responseText );
 	});
 }
