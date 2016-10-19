@@ -12,15 +12,16 @@ Version: 0.1
 Author URI: http://vldmr.xyz
 */
  
-// add response 
+// add response to action the_ajax_hook
 add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
-add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need this to serve non logged in users
+// need this to serve non logged in users
+add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' );
 
 add_action( 'wp_enqueue_scripts', 'myajax_data', 99 );
 
 function myajax_data() {
-	wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css',false,'1.1','all' );
-	wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ) );
+	wp_enqueue_style( 'red-button-test', plugin_dir_url( __FILE__ ) . 'red-button-test.css', array(), '1.1', 'all' );
+	wp_enqueue_script( 'my-ajax-handle', plugin_dir_url( __FILE__ ) . 'ajax.js', array( 'jquery' ), '1.1', false );
 	wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
  
@@ -32,7 +33,7 @@ function custom_meta_box_markup2() {
 	$stored_clicks = get_post_meta( $post_id, 'red_button5' , false);
 
 	foreach ($stored_clicks as $stored_click) {
-		$client_time = gmdate( 'H:i:s' , $stored_click["time"] );
+		$client_time = date_i18n( 'H:i:s' , $stored_click["time"] , true);
 
 		echo '<span> <b>'. esc_attr($client_time) .'</b> :: '. esc_attr($stored_click["client_IP"]) . ' </span>' ;
 	}
@@ -44,7 +45,7 @@ function add_custom_meta_box2() {
 
 add_action( "add_meta_boxes", "add_custom_meta_box2" );
  
- // THE FUNCTION
+ // function to process the_ajax_hook call
 function the_action_function() {
 
 	if ( empty( $_POST['nonce'] ) || empty( $_POST['time'] ) ) {
